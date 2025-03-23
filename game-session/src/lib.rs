@@ -1,5 +1,4 @@
 #![no_std]
-#![allow(warnings)]
 
 use game_session_io::{
     GameOverStatus, GameSession, GameSessionAction, GameSessionEvent, UserState, UserStatus,
@@ -95,14 +94,12 @@ fn start_game_action(game_session: &mut GameSession) {
 
         if user_state.wait_msg_id_game_session_to_wordle.is_some() {
             process_start_game_second_half(user_state);
+        } else if [UserStatus::Win, UserStatus::Lose, UserStatus::Timeout]
+            .contains(user_state.status.as_ref().unwrap())
+        {
+            process_start_game_first_half(game_session);
         } else {
-            if [UserStatus::Win, UserStatus::Lose, UserStatus::Timeout]
-                .contains(&user_state.status.as_ref().unwrap())
-            {
-                process_start_game_first_half(game_session);
-            } else {
-                process_game_already_started();
-            }
+            process_game_already_started();
         }
     }
 }
