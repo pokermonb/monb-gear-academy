@@ -1,4 +1,5 @@
 #![no_std]
+#![allow(warnings)]
 
 use game_session_io::{
     GameOverStatus, GameSession, GameSessionAction, GameSessionEvent, UserState, UserStatus,
