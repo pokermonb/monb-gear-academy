@@ -28,7 +28,7 @@ fn setup_system() -> System {
 }
 
 fn setup_wordle_program(system: &System) -> Program {
-    let wordle_program = Program::from_file(&system, wordle_program_path());
+    let wordle_program = Program::from_file(system, wordle_program_path());
     let message_id = wordle_program.send_bytes(USER, []);
     let block_run_result = system.run_next_block();
     assert!(block_run_result.succeed.contains(&message_id));
@@ -36,7 +36,7 @@ fn setup_wordle_program(system: &System) -> Program {
 }
 
 fn setup_game_session_program(system: &System, wordle_program_id: ProgramId) -> Program {
-    let game_session_program = Program::current(&system);
+    let game_session_program = Program::current(system);
     let message_id = game_session_program.send(USER, wordle_program_id);
     let block_run_result = system.run_next_block();
     assert!(block_run_result.succeed.contains(&message_id));
