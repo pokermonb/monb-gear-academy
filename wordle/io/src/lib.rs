@@ -31,5 +31,3 @@ pub enum Event {
         contained_in_word: Vec<u8>,
     },
 }
-
-
